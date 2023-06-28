@@ -45,6 +45,7 @@ export function BasketComponent(props: { component: BasketComponent }) {
 
   return (
     <div
+      key={props.component.id}
       ref={drag}
       style={{
         cursor: "move",

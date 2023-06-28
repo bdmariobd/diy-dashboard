@@ -32,7 +32,7 @@ export default function ComponentGrid() {
     newItem.id = Date.now().toString();
 
     console.log(newItem);
-    setComponents([...items, newItem]);
+    // setComponents([...items, newItem]);
   }
   return (
     <div ref={drop} className={styles.blueprint_grid}>
@@ -43,7 +43,7 @@ export default function ComponentGrid() {
         gridTemplateColumns="repeat(12, 1fr)"
         gap={1}
       >
-        {components.map((item, index) => {
+        {/*  {components.map((item, index) => {
           return (
             <Box gridColumn={"span 8"} key={item.id}>
               {item.type === ComponentType.Button ? (
@@ -57,7 +57,7 @@ export default function ComponentGrid() {
               )}
             </Box>
           );
-        })}
+        })} */}
       </Box>
     </div>
   );
