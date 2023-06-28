@@ -25,7 +25,7 @@ export default function ComponentBasket() {
   return (
     <Container className={styles.componentBasket}>
       {items.map((item, index) => {
-        return <BasketComponent component={item} />;
+        return <BasketComponent key={item.id} component={item} />;
       })}
     </Container>
   );
