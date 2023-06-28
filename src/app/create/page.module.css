@@ -1,0 +1,23 @@
+.component {
+  background-color: beige;
+}
+
+.blueprint_grid {
+  --grid-rows: 20; /* Número de filas */
+  --grid-columns: 20; /* Número de columnas */
+
+  background: #58a;
+  background-image: linear-gradient(white 1px, transparent 0),
+    linear-gradient(90deg, white 1px, transparent 0);
+  background-size: calc(100% / var(--grid-columns))
+    calc(100% / var(--grid-rows));
+  width: 500px;
+  height: 500px;
+}
+
+.componentBasket {
+  background-color: beige;
+  color: black;
+  height: 500px;
+  width: 500px;
+}
