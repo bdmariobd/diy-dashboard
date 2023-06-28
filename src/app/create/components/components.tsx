@@ -1,8 +1,10 @@
 import { Button, Typography } from "@mui/material";
+import { useState } from "react";
 import { DropResult } from "react-beautiful-dnd";
 import { useDrag } from "react-dnd";
 
 export enum ComponentType {
+  Blank = "blank",
   Text = "text",
   Image = "image",
   Video = "video",
@@ -14,22 +16,24 @@ export enum ComponentType {
 export interface BasketComponent {
   type: ComponentType;
   id: string;
-  text?: string;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  src?: string;
-  alt?: string;
-  video?: string;
-  audio?: string;
-  carousel?: string[];
+  x: number;
+  y: number;
+  expansionRows: number;
+  expansionColumns: number;
 }
 
+export interface ButtonComponent extends BasketComponent {
+  type: ComponentType.Button;
+  text: string;
+  expansionRows: 2;
+  expansionColumns: 1;
+}
 export interface ImageComponent extends BasketComponent {
   type: ComponentType.Image;
   src: string;
   alt: string;
+  expansionRows: 2;
+  expansionColumns: 2;
 }
 
 export function BasketComponent(props: { component: BasketComponent }) {
@@ -40,6 +44,17 @@ export function BasketComponent(props: { component: BasketComponent }) {
       isDragging: !!monitor.isDragging(),
     }),
   }));
+  if (props.component.type === ComponentType.Blank) {
+    return (
+      <div
+        key={props.component.id}
+        style={{ gridArea: "auto" }}
+        onClick={() => {
+          console.log("xd");
+        }}
+      ></div>
+    );
+  }
 
   if (isDragging) return <div ref={drag}> </div>;
 
@@ -48,11 +63,16 @@ export function BasketComponent(props: { component: BasketComponent }) {
       key={props.component.id}
       ref={drag}
       style={{
-        cursor: "move",
+        gridColumn: `${props.component.x + 1} / span ${
+          props.component.expansionColumns
+        }`,
+        gridRow: `${props.component.y + 1} / span ${
+          props.component.expansionRows
+        }`,
       }}
     >
       {props.component.type === ComponentType.Button ? (
-        <Button>Button</Button>
+        <Button variant="contained">Button</Button>
       ) : props.component.type === ComponentType.Text ? (
         <Typography> y </Typography>
       ) : props.component.type === ComponentType.Image ? (

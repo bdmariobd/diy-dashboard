@@ -2,17 +2,20 @@
   background-color: beige;
 }
 
-.blueprint_grid {
-  --grid-rows: 20; /* Número de filas */
-  --grid-columns: 20; /* Número de columnas */
+.grid_container {
+  display: grid;
+  grid-gap: 10px;
+  background-color: #2196f3;
+  padding: 10px;
+  height: 512px;
+  width: 512px;
+}
 
-  background: #58a;
-  background-image: linear-gradient(white 1px, transparent 0),
-    linear-gradient(90deg, white 1px, transparent 0);
-  background-size: calc(100% / var(--grid-columns))
-    calc(100% / var(--grid-rows));
-  width: 500px;
-  height: 500px;
+.grid-container > div {
+  background-color: rgba(226, 12, 12, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
 }
 
 .componentBasket {
