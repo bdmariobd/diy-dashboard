@@ -1,8 +1,7 @@
 import { Button, Typography } from "@mui/material";
-import { DropResult } from "react-beautiful-dnd";
-import { useDrag } from "react-dnd";
 
 export enum ComponentType {
+  Blank = "blank",
   Text = "text",
   Image = "image",
   Video = "video",
@@ -14,18 +13,12 @@ export enum ComponentType {
 export interface BasketComponent {
   type: ComponentType;
   id: string;
-  text?: string;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  src?: string;
-  alt?: string;
-  video?: string;
-  audio?: string;
-  carousel?: string[];
 }
 
+export interface ButtonComponent extends BasketComponent {
+  type: ComponentType.Button;
+  text: string;
+}
 export interface ImageComponent extends BasketComponent {
   type: ComponentType.Image;
   src: string;
@@ -33,26 +26,23 @@ export interface ImageComponent extends BasketComponent {
 }
 
 export function BasketComponent(props: { component: BasketComponent }) {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: props.component.type,
-    item: props.component,
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  }));
-
-  if (isDragging) return <div ref={drag}> </div>;
-
+  if (props.component.type === ComponentType.Blank) {
+    return <div></div>;
+  }
   return (
     <div
-      key={props.component.id}
-      ref={drag}
       style={{
-        cursor: "move",
+        /* position: "absolute",
+        top: 0,
+        bottom: 0, */
+        width: "100%",
+        height: "100%",
       }}
     >
       {props.component.type === ComponentType.Button ? (
-        <Button>Button</Button>
+        <Button fullWidth style={{ height: "100%" }} variant="contained">
+          Button
+        </Button>
       ) : props.component.type === ComponentType.Text ? (
         <Typography> y </Typography>
       ) : props.component.type === ComponentType.Image ? (

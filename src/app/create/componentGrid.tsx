@@ -1,64 +1,58 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import styles from "./page.module.css";
-import { BasketComponent, ComponentType } from "./components/components";
-import { DropTargetMonitor, useDrop } from "react-dnd";
-import { useRef, useState } from "react";
+import {
+  BasketComponent,
+  ButtonComponent,
+  ComponentType,
+} from "./components/components";
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
+import RGL, { WidthProvider } from "react-grid-layout";
+import "/node_modules/react-grid-layout/css/styles.css";
+import "/node_modules/react-resizable/css/styles.css";
 
+const ReactGridLayout = WidthProvider(RGL);
 export default function ComponentGrid() {
-  const [components, setComponents] = useState<BasketComponent[][]>([[]]);
+  const [items, setItems] = useState<BasketComponent[][]>([[]]);
+  const newButton: ButtonComponent = {
+    type: ComponentType.Button,
+    id: uuid(),
+    text: "Button",
+  };
+  const [layout, setlayout] = useState<RGL.Layout[]>([]);
 
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: [ComponentType.Button, ComponentType.Image, ComponentType.Text],
-    drop: (item: BasketComponent, monitor: DropTargetMonitor) =>
-      handleDrop(item, monitor),
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  }));
-
-  const [items, setItems] = useState<BasketComponent[]>([]);
-
-  function handleDrop(item: BasketComponent, monitor: DropTargetMonitor) {
-    const newPosition = monitor.getClientOffset();
-    const gridPosition = gridRef.current?.getBoundingClientRect();
-    if (!gridPosition || !newPosition) return;
-
-    const x = Math.floor((newPosition.x - gridPosition.left) / 64);
-    const y = Math.floor((newPosition.y - gridPosition.top) / 64);
-
-    const newItem: BasketComponent = { ...item, x, y };
-    newItem.id = Date.now().toString();
-
-    console.log(newItem);
-    // setComponents([...items, newItem]);
-  }
+  /* className: "layout",
+    items: 20,
+    rowHeight: 30,
+    onLayoutChange: function() {},
+    cols: 12 */
   return (
-    <div ref={drop} className={styles.blueprint_grid}>
-      <Box
-        display={"grid"}
-        style={{ width: "100%", height: "100%", position: "relative" }}
-        ref={gridRef}
-        gridTemplateColumns="repeat(12, 1fr)"
-        gap={1}
+    <div>
+      <ReactGridLayout
+        className={styles.componentGrid}
+        /* rowHeight={64} */
+        layout={layout}
+        // onLayoutChange={this.onLayoutChange}
+        onDrop={(layout, _layoutItem, _event) => {
+          setlayout(layout);
+        }}
+        cols={12}
+        width={1200}
+        rowHeight={30}
+        measureBeforeMount={false}
+        useCSSTransforms={true}
+        compactType={null}
+        preventCollision={!"vertical"}
+        isDroppable={true}
+        isResizable={true}
+        droppingItem={{ i: uuid(), h: 1, w: 1 }}
+        maxRows={12}
       >
-        {/*  {components.map((item, index) => {
-          return (
-            <Box gridColumn={"span 8"} key={item.id}>
-              {item.type === ComponentType.Button ? (
-                <Button>Button</Button>
-              ) : item.type === ComponentType.Text ? (
-                <Typography> y </Typography>
-              ) : item.type === ComponentType.Image ? (
-                <img src="https://picsum.photos/200" alt="placeholder" />
-              ) : (
-                <div></div>
-              )}
-            </Box>
-          );
-        })} */}
-      </Box>
+        {layout.map((itm, i) => (
+          <div key={itm.i} data-grid={itm} className={styles.block}>
+            <BasketComponent component={newButton} />
+          </div>
+        ))}
+      </ReactGridLayout>
     </div>
   );
 }

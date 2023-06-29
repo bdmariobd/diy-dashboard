@@ -1,23 +1,16 @@
-.component {
-  background-color: beige;
+.block {
+  height: 30px;
+  width: 69px;
 }
 
-.blueprint_grid {
-  --grid-rows: 20; /* Número de filas */
-  --grid-columns: 20; /* Número de columnas */
-
-  background: #58a;
-  background-image: linear-gradient(white 1px, transparent 0),
-    linear-gradient(90deg, white 1px, transparent 0);
-  background-size: calc(100% / var(--grid-columns))
-    calc(100% / var(--grid-rows));
-  width: 500px;
-  height: 500px;
+.componentGrid {
+  position: relative;
+  background-color: rgb(183, 185, 174);
+  min-height: 490px;
 }
 
 .componentBasket {
-  background-color: beige;
-  color: black;
-  height: 500px;
-  width: 500px;
+  background-color: rgb(76, 77, 72);
+  width: 1200px;
+  height: 100px;
 }

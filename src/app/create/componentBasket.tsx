@@ -1,32 +1,62 @@
-import React, { useEffect } from "react";
-import { Container, Button, Typography } from "@mui/material";
+import React from "react";
+import { Container, Stack } from "@mui/material";
 import styles from "./page.module.css";
-import { Draggable } from "react-beautiful-dnd";
 import {
   BasketComponent,
+  ButtonComponent,
   ComponentType,
   ImageComponent,
 } from "./components/components";
+import { v4 as uuid } from "uuid";
 
 //database mock
 
-const items: (BasketComponent | ImageComponent)[] = [
-  { id: "1", type: ComponentType.Button, text: "Button" },
-  {
-    id: "2",
+export default function ComponentBasket() {
+  const newButton: ButtonComponent = {
+    type: ComponentType.Button,
+    id: uuid(),
+    text: "Button",
+  };
+
+  const newImage: ImageComponent = {
     type: ComponentType.Image,
+    id: uuid(),
     src: "https://picsum.photos/200",
     alt: "placeholder",
-  },
-  { id: "3", type: ComponentType.Button },
-];
+  };
 
-export default function ComponentBasket() {
+  const buttonBasket = <BasketComponent component={newButton} />;
+
+  const imageBasket = <BasketComponent component={newImage} />;
+
   return (
     <Container className={styles.componentBasket}>
-      {items.map((item, index) => {
-        return <BasketComponent key={item.id} component={item} />;
-      })}
+      <Stack spacing={2} direction="row">
+        <div
+          className={styles.block}
+          draggable={true}
+          unselectable="on"
+          // this is a hack for firefox
+          // Firefox requires some kind of initialization
+          // which we can do by adding this attribute
+          // @see https://bugzilla.mozilla.org/show_bug.cgi?id=568313
+          onDragStart={(e) => e.dataTransfer.setData("text/plain", "")}
+        >
+          {buttonBasket}
+        </div>
+        <div
+          className={styles.block}
+          draggable={true}
+          unselectable="on"
+          // this is a hack for firefox
+          // Firefox requires some kind of initialization
+          // which we can do by adding this attribute
+          // @see https://bugzilla.mozilla.org/show_bug.cgi?id=568313
+          onDragStart={(e) => e.dataTransfer.setData("text/plain", "")}
+        >
+          {imageBasket}
+        </div>
+      </Stack>
     </Container>
   );
 }
