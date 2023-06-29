@@ -1,7 +1,4 @@
 import { Button, Typography } from "@mui/material";
-import { useState } from "react";
-import { DropResult } from "react-beautiful-dnd";
-import { useDrag } from "react-dnd";
 
 export enum ComponentType {
   Blank = "blank",
@@ -16,63 +13,36 @@ export enum ComponentType {
 export interface BasketComponent {
   type: ComponentType;
   id: string;
-  x: number;
-  y: number;
-  expansionRows: number;
-  expansionColumns: number;
 }
 
 export interface ButtonComponent extends BasketComponent {
   type: ComponentType.Button;
   text: string;
-  expansionRows: 2;
-  expansionColumns: 1;
 }
 export interface ImageComponent extends BasketComponent {
   type: ComponentType.Image;
   src: string;
   alt: string;
-  expansionRows: 2;
-  expansionColumns: 2;
 }
 
 export function BasketComponent(props: { component: BasketComponent }) {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: props.component.type,
-    item: props.component,
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  }));
   if (props.component.type === ComponentType.Blank) {
-    return (
-      <div
-        key={props.component.id}
-        style={{ gridArea: "auto" }}
-        onClick={() => {
-          console.log("xd");
-        }}
-      ></div>
-    );
+    return <div></div>;
   }
-
-  if (isDragging) return <div ref={drag}> </div>;
-
   return (
     <div
-      key={props.component.id}
-      ref={drag}
       style={{
-        gridColumn: `${props.component.x + 1} / span ${
-          props.component.expansionColumns
-        }`,
-        gridRow: `${props.component.y + 1} / span ${
-          props.component.expansionRows
-        }`,
+        /* position: "absolute",
+        top: 0,
+        bottom: 0, */
+        width: "100%",
+        height: "100%",
       }}
     >
       {props.component.type === ComponentType.Button ? (
-        <Button variant="contained">Button</Button>
+        <Button fullWidth style={{ height: "100%" }} variant="contained">
+          Button
+        </Button>
       ) : props.component.type === ComponentType.Text ? (
         <Typography> y </Typography>
       ) : props.component.type === ComponentType.Image ? (

@@ -1,26 +1,16 @@
-.component {
-  background-color: beige;
+.block {
+  height: 30px;
+  width: 69px;
 }
 
-.grid_container {
-  display: grid;
-  grid-gap: 10px;
-  background-color: #2196f3;
-  padding: 10px;
-  height: 512px;
-  width: 512px;
-}
-
-.grid-container > div {
-  background-color: rgba(226, 12, 12, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+.componentGrid {
+  position: relative;
+  background-color: rgb(183, 185, 174);
+  min-height: 490px;
 }
 
 .componentBasket {
-  background-color: beige;
-  color: black;
-  height: 500px;
-  width: 500px;
+  background-color: rgb(76, 77, 72);
+  width: 1200px;
+  height: 100px;
 }
