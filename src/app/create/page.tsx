@@ -1,16 +1,22 @@
 "use client";
-import { Container, Slider, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Container, Grid, Slider, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ComponentGrid from "./componentGrid";
 import ComponentBasket from "./componentBasket";
 import { BasketComponent } from "./components/components";
+import ComponentEditor from "./componentEditor";
 
 export default function Create() {
-  const [components, setComponents] = useState<BasketComponent[]>([]);
+  // declare items dictionary state
+  const [items, setItems] = useState<{ [key: string]: BasketComponent }>({});
+  const [movingItem, setMovingItem] = useState<string>();
+  const [selectedItem, setSelectedItem] = useState<BasketComponent>();
 
-  const onComponentAdded = (component: BasketComponent) => {
-    setComponents([...components, component]);
+  const onSetItems = (e: BasketComponent) => {
+    setItems((prev) => {
+      return { ...prev, [e.id]: e };
+    });
   };
 
   return (
@@ -33,10 +39,24 @@ export default function Create() {
         valueLabelDisplay="auto"
       />
 
-      <div>
-        <ComponentBasket></ComponentBasket>
-        <ComponentGrid></ComponentGrid>
-      </div>
+      <Grid container spacing={2}>
+        <Grid item>
+          <ComponentEditor selectedItem={selectedItem}></ComponentEditor>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <ComponentGrid
+            movingItem={movingItem}
+            items={items}
+            setSelectedItem={setSelectedItem}
+          ></ComponentGrid>
+        </Grid>
+        <Grid item>
+          <ComponentBasket
+            setMovingItem={setMovingItem}
+            setItems={onSetItems}
+          ></ComponentBasket>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

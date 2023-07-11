@@ -1,4 +1,5 @@
 import { Button, Typography } from "@mui/material";
+// import Image from "next/image";
 
 export enum ComponentType {
   Blank = "blank",
@@ -13,16 +14,22 @@ export enum ComponentType {
 export interface BasketComponent {
   type: ComponentType;
   id: string;
+  x?: number;
+  y?: number;
 }
 
 export interface ButtonComponent extends BasketComponent {
   type: ComponentType.Button;
   text: string;
+  x?: 1;
+  y?: 1;
 }
 export interface ImageComponent extends BasketComponent {
   type: ComponentType.Image;
   src: string;
   alt: string;
+  x?: 4;
+  y?: 4;
 }
 
 export function BasketComponent(props: { component: BasketComponent }) {
@@ -46,7 +53,11 @@ export function BasketComponent(props: { component: BasketComponent }) {
       ) : props.component.type === ComponentType.Text ? (
         <Typography> y </Typography>
       ) : props.component.type === ComponentType.Image ? (
-        <img src="https://picsum.photos/200" alt="placeholder" />
+        <img
+          style={{ height: "100%", width: "100%" }}
+          src="https://picsum.photos/1000"
+          alt="placeholder"
+        />
       ) : (
         <div></div>
       )}
