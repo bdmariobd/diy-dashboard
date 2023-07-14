@@ -36,6 +36,8 @@ export default function ComponentEditor(props: {
         return <Typography> image </Typography>;
       case "button":
         return <Typography> button </Typography>;
+      case "mirror":
+        return <Typography> mirror </Typography>;
       default:
         return <Typography> Select an item </Typography>;
     }

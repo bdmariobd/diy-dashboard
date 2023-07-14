@@ -1,4 +1,9 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+
+import GridButton from "./gridButton";
+import GridImage from "./gridImage";
+import GridMirror from "./gridMirror";
+
 // import Image from "next/image";
 
 export enum ComponentType {
@@ -9,6 +14,7 @@ export enum ComponentType {
   Audio = "audio",
   Button = "button",
   Carousel = "carousel",
+  Mirror = "mirror",
 }
 
 export interface BasketComponent {
@@ -39,31 +45,24 @@ export interface TextComponent extends BasketComponent {
   y?: 4;
 }
 
+export interface MirrorComponent extends BasketComponent {
+  type: ComponentType.Mirror;
+  cameraActivated: boolean;
+}
+
 export function BasketComponent(props: { component: BasketComponent }) {
   if (props.component.type === ComponentType.Blank) {
     return <div></div>;
   } else if (props.component.type === ComponentType.Button) {
-    const component = props.component as ButtonComponent;
-    return (
-      <Button
-        style={{ height: "100%", width: "100%", minWidth: "auto" }}
-        fullWidth
-        variant="contained"
-      >
-        {component.text}
-      </Button>
-    );
+    return <GridButton component={props.component as ButtonComponent} />;
   } else if (props.component.type === ComponentType.Text) {
     const component = props.component as TextComponent;
     return <Typography> {component.text} </Typography>;
   } else if (props.component.type === ComponentType.Image) {
-    return (
-      <img
-        style={{ height: "100%", width: "100%" }}
-        src="https://picsum.photos/1000"
-        alt="placeholder"
-      />
-    );
+    return <GridImage component={props.component as ImageComponent} />;
+  } else if (props.component.type === ComponentType.Mirror) {
+    const component = props.component as MirrorComponent;
+    return <GridMirror component={component} />;
   } else {
     return <div></div>;
   }

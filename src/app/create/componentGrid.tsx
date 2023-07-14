@@ -8,16 +8,21 @@ import "/node_modules/react-resizable/css/styles.css";
 const ReactGridLayout = WidthProvider(RGL);
 export default function ComponentGrid(props: {
   items: { [key: string]: BasketComponent };
-  movingItem?: string;
+  movingItem?: BasketComponent;
   setSelectedItem: Function;
 }) {
   const [layout, setlayout] = useState<RGL.Layout[]>([]);
 
-  useEffect(() => {
-    console.log("items changed");
-    console.log(props.items);
-    console.log(layout);
-  }, [props.items]);
+  const onDropHandler = (layout: RGL.Layout[], layoutItem: RGL.Layout) => {
+    console.log(props.movingItem);
+    if (props.movingItem?.type === "mirror") {
+      layoutItem.minH = 4;
+      layoutItem.minW = 4;
+      layoutItem.h = 4;
+      layoutItem.w = 4;
+    }
+    setlayout(layout);
+  };
 
   /* className: "layout",
     items: 20,
@@ -33,7 +38,7 @@ export default function ComponentGrid(props: {
         // onLayoutChange={this.onLayoutChange}
         onDrop={(layout, _layoutItem, _event) => {
           //change dropped item id to uuid
-          setlayout(layout);
+          onDropHandler(layout, _layoutItem);
         }}
         cols={12}
         width={1200}
@@ -43,7 +48,7 @@ export default function ComponentGrid(props: {
         compactType={null}
         isDroppable={true}
         isResizable={true}
-        droppingItem={{ i: props.movingItem || "blank", h: 1, w: 1 }}
+        droppingItem={{ i: props.movingItem?.id || "blank", h: 1, w: 1 }}
         maxRows={12}
       >
         {layout.map((item) => {

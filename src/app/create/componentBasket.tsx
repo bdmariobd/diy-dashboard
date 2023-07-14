@@ -6,11 +6,12 @@ import {
   ButtonComponent,
   ComponentType,
   ImageComponent,
+  MirrorComponent,
   TextComponent,
 } from "./components/components";
 import { v4 as uuid } from "uuid";
 
-//database mock
+//TODO retrieve from another source
 const newButton: ButtonComponent = {
   type: ComponentType.Button,
   text: "Test",
@@ -30,7 +31,18 @@ const newText: TextComponent = {
   id: uuid(),
 };
 
-const newComponents: BasketComponent[] = [newButton, newImage, newText];
+const newMirror: MirrorComponent = {
+  type: ComponentType.Mirror,
+  id: uuid(),
+  cameraActivated: false,
+};
+
+const newComponents: BasketComponent[] = [
+  newButton,
+  newImage,
+  newText,
+  newMirror,
+];
 
 export default function ComponentBasket(props: {
   setItems: Function;
@@ -45,13 +57,14 @@ export default function ComponentBasket(props: {
       >
         {newComponents.map((component) => (
           <div
+            key={component.id}
             draggable={true}
             unselectable="on"
             // this is a hack for firefox
             // Firefox requires some kind of initialization
             // which we can do by adding this attribute
             onDragStart={(e) => {
-              props.setMovingItem(component.id);
+              props.setMovingItem(component);
               e.dataTransfer.setData("text/plain", "");
             }}
             onDragEnd={(e) => {

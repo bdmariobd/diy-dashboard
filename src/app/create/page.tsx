@@ -4,18 +4,27 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ComponentGrid from "./componentGrid";
 import ComponentBasket from "./componentBasket";
-import { BasketComponent } from "./components/components";
+import {
+  BasketComponent,
+  ComponentType,
+  MirrorComponent,
+} from "./components/components";
 import ComponentEditor from "./componentEditor";
 
 export default function Create() {
   // declare items dictionary state
   const [items, setItems] = useState<{ [key: string]: BasketComponent }>({});
-  const [movingItem, setMovingItem] = useState<string>();
+  const [movingItem, setMovingItem] = useState<BasketComponent>();
   const [selectedItem, setSelectedItem] = useState<BasketComponent>();
 
   const onSetItems = (e: BasketComponent) => {
+    let newItem: any = { ...e };
+    if (e.type === ComponentType.Mirror) {
+      newItem = newItem as MirrorComponent;
+      newItem.cameraActivated = true;
+    }
     setItems((prev) => {
-      return { ...prev, [e.id]: e };
+      return { ...prev, [e.id]: newItem };
     });
   };
 
