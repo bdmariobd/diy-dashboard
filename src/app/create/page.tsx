@@ -1,5 +1,6 @@
 "use client";
-import { Container, Fab, Grid, Slider, Typography } from "@mui/material";
+
+import { Container, Grid } from "@mui/material";
 import React, { useState } from "react";
 import Link from "next/link";
 import ComponentGrid from "./componentGrid";

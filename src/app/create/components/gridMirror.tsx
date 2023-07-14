@@ -5,7 +5,6 @@ import { MirrorComponent } from "./components";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import DownloadIcon from "@mui/icons-material/Download";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import Image from "next/image";
 import webcamPreview from "./imagePreview.png";
 import { useCallback, useRef, useState } from "react";

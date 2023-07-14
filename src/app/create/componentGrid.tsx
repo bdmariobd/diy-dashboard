@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import { BasketComponent } from "./components/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
