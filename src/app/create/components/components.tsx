@@ -32,35 +32,39 @@ export interface ImageComponent extends BasketComponent {
   y?: 4;
 }
 
+export interface TextComponent extends BasketComponent {
+  type: ComponentType.Text;
+  text: string;
+  x?: 4;
+  y?: 4;
+}
+
 export function BasketComponent(props: { component: BasketComponent }) {
   if (props.component.type === ComponentType.Blank) {
     return <div></div>;
+  } else if (props.component.type === ComponentType.Button) {
+    const component = props.component as ButtonComponent;
+    return (
+      <Button
+        style={{ height: "100%", width: "100%", minWidth: "auto" }}
+        fullWidth
+        variant="contained"
+      >
+        {component.text}
+      </Button>
+    );
+  } else if (props.component.type === ComponentType.Text) {
+    const component = props.component as TextComponent;
+    return <Typography> {component.text} </Typography>;
+  } else if (props.component.type === ComponentType.Image) {
+    return (
+      <img
+        style={{ height: "100%", width: "100%" }}
+        src="https://picsum.photos/1000"
+        alt="placeholder"
+      />
+    );
+  } else {
+    return <div></div>;
   }
-  return (
-    <div
-      style={{
-        /* position: "absolute",
-        top: 0,
-        bottom: 0, */
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      {props.component.type === ComponentType.Button ? (
-        <Button fullWidth style={{ height: "100%" }} variant="contained">
-          Button
-        </Button>
-      ) : props.component.type === ComponentType.Text ? (
-        <Typography> y </Typography>
-      ) : props.component.type === ComponentType.Image ? (
-        <img
-          style={{ height: "100%", width: "100%" }}
-          src="https://picsum.photos/1000"
-          alt="placeholder"
-        />
-      ) : (
-        <div></div>
-      )}
-    </div>
-  );
 }

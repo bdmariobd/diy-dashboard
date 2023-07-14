@@ -1,14 +1,37 @@
 import { Typography } from "@mui/material";
-import { BasketComponent } from "./components/components";
-import { render } from "react-dom";
+import { BasketComponent, TextComponent } from "./components/components";
+import { useState } from "react";
 
 export default function ComponentEditor(props: {
   selectedItem?: BasketComponent;
+  setSelectedItem: Function;
 }) {
+  const [editOptions, setEditOptions] = useState<any>({});
+
+  const textEditor = () => {
+    const textComponent = props.selectedItem as TextComponent;
+    return (
+      <>
+        <Typography> Text </Typography>
+        <input
+          type="text"
+          value={editOptions.text}
+          onChange={(e) => {
+            setEditOptions({ text: e.target.value });
+            props.setSelectedItem({
+              ...textComponent,
+              text: e.target.value,
+            });
+          }}
+        />
+      </>
+    );
+  };
+
   const renderEditorPanel = () => {
     switch (props.selectedItem?.type) {
       case "text":
-        return <Typography> text </Typography>;
+        return textEditor();
       case "image":
         return <Typography> image </Typography>;
       case "button":

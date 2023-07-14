@@ -41,7 +41,6 @@ export default function ComponentGrid(props: {
         measureBeforeMount={false}
         useCSSTransforms={true}
         compactType={null}
-        preventCollision={!"vertical"}
         isDroppable={true}
         isResizable={true}
         droppingItem={{ i: props.movingItem || "blank", h: 1, w: 1 }}
@@ -54,7 +53,6 @@ export default function ComponentGrid(props: {
           return (
             <div
               key={item.i}
-              className={styles.block}
               data-grid={item}
               onClick={() => props.setSelectedItem(props.items[item.i])}
             >
