@@ -16,6 +16,8 @@ const newButton: ButtonComponent = {
   type: ComponentType.Button,
   text: "Test",
   id: uuid(),
+  maxX: 1,
+  maxY: 1,
 };
 
 const newImage: ImageComponent = {
@@ -23,18 +25,24 @@ const newImage: ImageComponent = {
   src: "https://picsum.photos/200",
   alt: "placeholder",
   id: uuid(),
+  maxX: 1,
+  maxY: 1,
 };
 
 const newText: TextComponent = {
   type: ComponentType.Text,
   text: "Text",
   id: uuid(),
+  maxX: 1,
+  maxY: 1,
 };
 
 const newMirror: MirrorComponent = {
   type: ComponentType.Mirror,
   id: uuid(),
   cameraActivated: false,
+  maxX: 4,
+  maxY: 4,
 };
 
 const newComponents: BasketComponent[] = [

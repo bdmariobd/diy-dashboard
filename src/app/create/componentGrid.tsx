@@ -15,12 +15,8 @@ export default function ComponentGrid(props: {
 
   const onDropHandler = (layout: RGL.Layout[], layoutItem: RGL.Layout) => {
     console.log(props.movingItem);
-    if (props.movingItem?.type === "mirror") {
-      layoutItem.minH = 4;
-      layoutItem.minW = 4;
-      layoutItem.h = 4;
-      layoutItem.w = 4;
-    }
+    layoutItem.minW = props.movingItem?.maxX;
+    layoutItem.minH = props.movingItem?.maxY;
     setlayout(layout);
   };
 
@@ -48,7 +44,11 @@ export default function ComponentGrid(props: {
         compactType={null}
         isDroppable={true}
         isResizable={true}
-        droppingItem={{ i: props.movingItem?.id || "blank", h: 1, w: 1 }}
+        droppingItem={{
+          i: props.movingItem?.id || "blank",
+          h: props.movingItem?.maxX || 1,
+          w: props.movingItem?.maxY || 1,
+        }}
         maxRows={12}
       >
         {layout.map((item) => {

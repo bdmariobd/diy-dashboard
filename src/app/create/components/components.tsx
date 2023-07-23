@@ -22,6 +22,8 @@ export interface BasketComponent {
   id: string;
   x?: number;
   y?: number;
+  maxX: number;
+  maxY: number;
 }
 
 export interface ButtonComponent extends BasketComponent {
@@ -29,6 +31,8 @@ export interface ButtonComponent extends BasketComponent {
   text: string;
   x?: 1;
   y?: 1;
+  maxX: 1;
+  maxY: 1;
 }
 export interface ImageComponent extends BasketComponent {
   type: ComponentType.Image;
@@ -36,6 +40,8 @@ export interface ImageComponent extends BasketComponent {
   alt: string;
   x?: 4;
   y?: 4;
+  maxX: 1;
+  maxY: 1;
 }
 
 export interface TextComponent extends BasketComponent {
@@ -43,11 +49,15 @@ export interface TextComponent extends BasketComponent {
   text: string;
   x?: 4;
   y?: 4;
+  maxX: 1;
+  maxY: 1;
 }
 
 export interface MirrorComponent extends BasketComponent {
   type: ComponentType.Mirror;
   cameraActivated: boolean;
+  maxX: 4;
+  maxY: 4;
 }
 
 export function BasketComponent(props: { component: BasketComponent }) {
