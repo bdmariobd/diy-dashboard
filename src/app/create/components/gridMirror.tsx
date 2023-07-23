@@ -16,7 +16,10 @@ export default function GridMirror(props: { component: MirrorComponent }) {
   const webcamRef = useRef<any>();
   const capture = useCallback(() => {
     if (!webcamRef.current) return;
-    const imageSrc = webcamRef.current.getScreenshot();
+    const imageSrc = webcamRef.current.getScreenshot({
+      width: 1920,
+      height: 1080,
+    });
     setImage(imageSrc);
   }, [webcamRef]);
 
