@@ -4,6 +4,7 @@ import { useState } from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
+import { Paper } from "@mui/material";
 
 const ReactGridLayout = WidthProvider(RGL);
 export default function ComponentGrid(props: {
@@ -14,7 +15,6 @@ export default function ComponentGrid(props: {
   const [layout, setlayout] = useState<RGL.Layout[]>([]);
 
   const onDropHandler = (layout: RGL.Layout[], layoutItem: RGL.Layout) => {
-    console.log(props.movingItem);
     layoutItem.minW = props.movingItem?.maxX;
     layoutItem.minH = props.movingItem?.maxY;
     setlayout(layout);
@@ -26,7 +26,7 @@ export default function ComponentGrid(props: {
     onLayoutChange: function() {},
     cols: 12 */
   return (
-    <div>
+    <Paper>
       <ReactGridLayout
         className={styles.componentGrid}
         /* rowHeight={64} */
@@ -66,6 +66,6 @@ export default function ComponentGrid(props: {
           );
         })}
       </ReactGridLayout>
-    </div>
+    </Paper>
   );
 }
