@@ -2,7 +2,15 @@ import { Typography } from "@mui/material";
 
 import GridButton from "./gridButton";
 import GridImage from "./gridImage";
-import GridMirror from "./gridMirror";
+
+const GridMirror = dynamic(
+  () => {
+    return import("./gridMirror");
+  },
+  { ssr: false }
+);
+
+import dynamic from "next/dynamic";
 
 // import Image from "next/image";
 
