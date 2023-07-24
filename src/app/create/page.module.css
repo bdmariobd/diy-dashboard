@@ -1,16 +1,4 @@
-.block {
-  height: 30px;
-  width: 69px;
-}
-
 .componentGrid {
   position: relative;
-  background-color: rgb(183, 185, 174);
   min-height: 490px;
-}
-
-.componentBasket {
-  background-color: rgb(76, 77, 72);
-  width: 1200px;
-  height: 100px;
 }

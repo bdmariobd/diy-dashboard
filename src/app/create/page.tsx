@@ -1,42 +1,59 @@
 "use client";
-import { Container, Slider, Typography } from "@mui/material";
+
+import { Container, Grid } from "@mui/material";
 import React, { useState } from "react";
 import Link from "next/link";
 import ComponentGrid from "./componentGrid";
 import ComponentBasket from "./componentBasket";
-import { BasketComponent } from "./components/components";
+import {
+  BasketComponent,
+  ComponentType,
+  MirrorComponent,
+} from "./components/components";
+import ComponentEditor from "./componentEditor";
 
 export default function Create() {
-  const [components, setComponents] = useState<BasketComponent[]>([]);
+  // declare items dictionary state
+  const [items, setItems] = useState<{ [key: string]: BasketComponent }>({});
+  const [movingItem, setMovingItem] = useState<BasketComponent>();
+  const [selectedItem, setSelectedItem] = useState<BasketComponent>();
 
-  const onComponentAdded = (component: BasketComponent) => {
-    setComponents([...components, component]);
+  const onSetItems = (e: BasketComponent) => {
+    let newItem: any = { ...e };
+    if (e.type === ComponentType.Mirror) {
+      newItem = newItem as MirrorComponent;
+      newItem.cameraActivated = true;
+    }
+    setItems((prev) => {
+      return { ...prev, [e.id]: newItem };
+    });
   };
 
   return (
     <Container>
       <Link href="/">Go to homepage</Link>
-      <Typography> x </Typography>
-      <Slider
-        min={5}
-        defaultValue={20}
-        max={50}
-        aria-label="Default"
-        valueLabelDisplay="auto"
-      />
-      <Typography> y </Typography>
-      <Slider
-        min={5}
-        defaultValue={20}
-        max={50}
-        aria-label="Default"
-        valueLabelDisplay="auto"
-      />
 
-      <div>
-        <ComponentBasket></ComponentBasket>
-        <ComponentGrid></ComponentGrid>
-      </div>
+      <Grid container spacing={2}>
+        <Grid item md={2}>
+          <ComponentEditor
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          ></ComponentEditor>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <ComponentGrid
+            movingItem={movingItem}
+            items={items}
+            setSelectedItem={setSelectedItem}
+          ></ComponentGrid>
+        </Grid>
+        <Grid item md={2}>
+          <ComponentBasket
+            setMovingItem={setMovingItem}
+            setItems={onSetItems}
+          ></ComponentBasket>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
