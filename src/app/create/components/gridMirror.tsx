@@ -77,6 +77,7 @@ export default function GridMirror(props: { component: MirrorComponent }) {
           style={{ height: "100%", width: "100%" }}
           audio={false}
           screenshotFormat="image/jpeg"
+          screenshotQuality={1}
         />
         <IconButton
           onClick={capture}
