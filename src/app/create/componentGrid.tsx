@@ -19,12 +19,6 @@ export default function ComponentGrid(props: {
     layoutItem.minH = props.movingItem?.maxY;
     setlayout(layout);
   };
-
-  /* className: "layout",
-    items: 20,
-    rowHeight: 30,
-    onLayoutChange: function() {},
-    cols: 12 */
   return (
     <Paper>
       <ReactGridLayout

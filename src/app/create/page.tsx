@@ -29,6 +29,13 @@ export default function Create() {
     });
   };
 
+  const onChangeSelecteditem = (e: BasketComponent) => {
+    setSelectedItem(e);
+    setItems((prev) => {
+      return { ...prev, [e.id]: e };
+    });
+  };
+
   return (
     <Container>
       <Link href="/">Go to homepage</Link>
@@ -37,7 +44,7 @@ export default function Create() {
         <Grid item md={2}>
           <ComponentEditor
             selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
+            setSelectedItem={onChangeSelecteditem}
           ></ComponentEditor>
         </Grid>
         <Grid item xs={12} md={8}>
