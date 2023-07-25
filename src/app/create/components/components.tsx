@@ -11,6 +11,7 @@ const GridMirror = dynamic(
 );
 
 import dynamic from "next/dynamic";
+import GridText from "./gridText";
 
 // import Image from "next/image";
 
@@ -66,22 +67,31 @@ export interface MirrorComponent extends BasketComponent {
   cameraActivated: boolean;
   maxX: 4;
   maxY: 4;
+  deviceId?: string;
 }
 
 export function BasketComponent(props: { component: BasketComponent }) {
-  if (props.component.type === ComponentType.Blank) {
-    return <div></div>;
-  } else if (props.component.type === ComponentType.Button) {
-    return <GridButton component={props.component as ButtonComponent} />;
-  } else if (props.component.type === ComponentType.Text) {
-    const component = props.component as TextComponent;
-    return <Typography> {component.text} </Typography>;
-  } else if (props.component.type === ComponentType.Image) {
-    return <GridImage component={props.component as ImageComponent} />;
-  } else if (props.component.type === ComponentType.Mirror) {
-    const component = props.component as MirrorComponent;
-    return <GridMirror component={component} />;
-  } else {
-    return <div></div>;
+  const { component } = props;
+
+  switch (component.type) {
+    case ComponentType.Blank:
+      return <div></div>;
+
+    case ComponentType.Button:
+      return <GridButton component={component as ButtonComponent} />;
+
+    case ComponentType.Text:
+      const textComponent = component as TextComponent;
+      return <GridText component={textComponent} />;
+
+    case ComponentType.Image:
+      return <GridImage component={component as ImageComponent} />;
+
+    case ComponentType.Mirror:
+      const mirrorComponent = component as MirrorComponent;
+      return <GridMirror component={mirrorComponent} />;
+
+    default:
+      return <></>;
   }
 }

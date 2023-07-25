@@ -78,6 +78,9 @@ export default function GridMirror(props: { component: MirrorComponent }) {
           audio={false}
           screenshotFormat="image/jpeg"
           screenshotQuality={1}
+          videoConstraints={{
+            deviceId: props.component.deviceId,
+          }}
         />
         <IconButton
           onClick={capture}
