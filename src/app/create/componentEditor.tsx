@@ -38,7 +38,7 @@ export default function ComponentEditor(props: {
   }, []);
 
   const textEditor = () => {
-    const textComponent = props.selectedItem;
+    const textComponent = props.selectedItem as TextComponent;
     return (
       <>
         <Typography> Text </Typography>
@@ -59,7 +59,7 @@ export default function ComponentEditor(props: {
   };
 
   const imageEditor = () => {
-    const imageComponent = props.selectedItem;
+    const imageComponent = props.selectedItem as ImageComponent;
     return (
       <>
         <Typography> Image </Typography>
@@ -80,7 +80,7 @@ export default function ComponentEditor(props: {
   };
 
   const buttonEditor = () => {
-    const buttonComponent = props.selectedItem;
+    const buttonComponent = props.selectedItem as ButtonComponent;
     return (
       <>
         <Typography> Button </Typography>
@@ -107,12 +107,22 @@ export default function ComponentEditor(props: {
             });
           }}
         />
+        <input
+          value={editOptions.color}
+          type="color"
+          onChange={(e) => {
+            props.setSelectedItem({
+              ...buttonComponent,
+              color: e.target.value,
+            });
+          }}
+        />
       </>
     );
   };
 
   const mirrorEditor = () => {
-    const mirrorComponent = props.selectedItem;
+    const mirrorComponent = props.selectedItem as MirrorComponent;
     return (
       <>
         <Typography> Mirror </Typography>
