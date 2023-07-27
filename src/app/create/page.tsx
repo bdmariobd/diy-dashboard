@@ -1,8 +1,7 @@
 "use client";
 
-import { Container, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useState } from "react";
-import Link from "next/link";
 import ComponentGrid from "./componentGrid";
 import ComponentBasket from "./componentBasket";
 import {
@@ -37,9 +36,7 @@ export default function Create() {
   };
 
   return (
-    <Container>
-      <Link href="/">Go to homepage</Link>
-
+    <>
       <Grid container spacing={2}>
         <Grid item md={2}>
           <ComponentEditor
@@ -61,6 +58,6 @@ export default function Create() {
           ></ComponentBasket>
         </Grid>
       </Grid>
-    </Container>
+    </>
   );
 }
