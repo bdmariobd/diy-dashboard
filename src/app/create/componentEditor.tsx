@@ -5,6 +5,7 @@ import {
   Select,
   TextField,
   Typography,
+  FormControl,
 } from "@mui/material";
 import {
   BasketComponent,
@@ -126,26 +127,28 @@ export default function ComponentEditor(props: {
     return (
       <>
         <Typography> Mirror </Typography>
-        <InputLabel id="demo-simple-select-label">Select Camera</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={editOptions.deviceId || ""}
-          label="Select Camera"
-          onChange={(e) => {
-            setEditOptions({ ...editOptions, deviceId: e.target.value });
-            props.setSelectedItem({
-              ...mirrorComponent,
-              deviceId: e.target.value,
-            });
-          }}
-        >
-          {devices.map((device) => (
-            <MenuItem key={device.deviceId} value={device.deviceId}>
-              {device.label}
-            </MenuItem>
-          ))}
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Select Camera</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={editOptions.deviceId || ""}
+            label="Select Camera"
+            onChange={(e) => {
+              setEditOptions({ ...editOptions, deviceId: e.target.value });
+              props.setSelectedItem({
+                ...mirrorComponent,
+                deviceId: e.target.value,
+              });
+            }}
+          >
+            {devices.map((device) => (
+              <MenuItem key={device.deviceId} value={device.deviceId}>
+                {device.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </>
     );
   };

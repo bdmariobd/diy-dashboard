@@ -42,7 +42,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={styles.navBar}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
