@@ -1,6 +1,7 @@
 .componentGrid {
   position: relative;
-  min-height: 490px;
+  min-height: 70vh;
+  height: 70vh;
 }
 
 .deleteIcon {

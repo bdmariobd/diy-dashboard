@@ -38,6 +38,7 @@ export interface BasketComponent {
 export interface ButtonComponent extends BasketComponent {
   type: ComponentType.Button;
   text: string;
+  color?: string;
   x?: 1;
   y?: 1;
   maxX: 1;

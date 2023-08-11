@@ -16,6 +16,7 @@ const newButton: ButtonComponent = {
   type: ComponentType.Button,
   text: "Test",
   id: uuid(),
+  color: "#1976D2",
   maxX: 1,
   maxY: 1,
 };

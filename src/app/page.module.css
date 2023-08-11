@@ -1,0 +1,8 @@
+.navBarLinks {
+  color: inherit;
+  text-decoration: none; /* no underline */
+}
+
+.navBar {
+  margin-bottom: 20px;
+}

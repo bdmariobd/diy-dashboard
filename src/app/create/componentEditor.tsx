@@ -5,6 +5,7 @@ import {
   Select,
   TextField,
   Typography,
+  FormControl,
 } from "@mui/material";
 import {
   BasketComponent,
@@ -38,7 +39,7 @@ export default function ComponentEditor(props: {
   }, []);
 
   const textEditor = () => {
-    const textComponent = props.selectedItem;
+    const textComponent = props.selectedItem as TextComponent;
     return (
       <>
         <Typography> Text </Typography>
@@ -59,7 +60,7 @@ export default function ComponentEditor(props: {
   };
 
   const imageEditor = () => {
-    const imageComponent = props.selectedItem;
+    const imageComponent = props.selectedItem as ImageComponent;
     return (
       <>
         <Typography> Image </Typography>
@@ -80,7 +81,7 @@ export default function ComponentEditor(props: {
   };
 
   const buttonEditor = () => {
-    const buttonComponent = props.selectedItem;
+    const buttonComponent = props.selectedItem as ButtonComponent;
     return (
       <>
         <Typography> Button </Typography>
@@ -107,35 +108,47 @@ export default function ComponentEditor(props: {
             });
           }}
         />
+        <input
+          value={editOptions.color}
+          type="color"
+          onChange={(e) => {
+            props.setSelectedItem({
+              ...buttonComponent,
+              color: e.target.value,
+            });
+          }}
+        />
       </>
     );
   };
 
   const mirrorEditor = () => {
-    const mirrorComponent = props.selectedItem;
+    const mirrorComponent = props.selectedItem as MirrorComponent;
     return (
       <>
         <Typography> Mirror </Typography>
-        <InputLabel id="demo-simple-select-label">Select Camera</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={editOptions.deviceId || ""}
-          label="Select Camera"
-          onChange={(e) => {
-            setEditOptions({ ...editOptions, deviceId: e.target.value });
-            props.setSelectedItem({
-              ...mirrorComponent,
-              deviceId: e.target.value,
-            });
-          }}
-        >
-          {devices.map((device) => (
-            <MenuItem key={device.deviceId} value={device.deviceId}>
-              {device.label}
-            </MenuItem>
-          ))}
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Select Camera</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={editOptions.deviceId || ""}
+            label="Select Camera"
+            onChange={(e) => {
+              setEditOptions({ ...editOptions, deviceId: e.target.value });
+              props.setSelectedItem({
+                ...mirrorComponent,
+                deviceId: e.target.value,
+              });
+            }}
+          >
+            {devices.map((device) => (
+              <MenuItem key={device.deviceId} value={device.deviceId}>
+                {device.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </>
     );
   };
