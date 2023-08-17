@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  name      String
+  email     String      @unique
+  password  String
+  Dashboard Dashboard[]
+}
+
+model Dashboard {
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  name        String
+  description String
+  user        User        @relation(fields: [userId], references: [id])
+  userId      Int
+  components  Component[]
+}
+
+model Component {
+  id          Int              @id @default(autoincrement())
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  type        ComponentType
+  x           Int
+  y           Int
+  maxX        Int
+  maxY        Int
+  text        TextComponent?
+  image       ImageComponent?
+  button      ButtonComponent?
+  mirror      MirrorComponent?
+  Dashboard   Dashboard?       @relation(fields: [dashboardId], references: [id])
+  dashboardId Int?
+}
+
+model TextComponent {
+  id          Int       @id @default(autoincrement())
+  text        String
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int       @unique
+}
+
+model ImageComponent {
+  id          Int       @id @default(autoincrement())
+  url         String
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int       @unique
+}
+
+model ButtonComponent {
+  id          Int       @id @default(autoincrement())
+  text        String
+  color       String
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int       @unique
+}
+
+model MirrorComponent {
+  id          Int       @id @default(autoincrement())
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId Int       @unique
+}
+
+enum ComponentType {
+  Blank
+  Text
+  Image
+  Video
+  Audio
+  Button
+  Carousel
+  Mirror
+}
