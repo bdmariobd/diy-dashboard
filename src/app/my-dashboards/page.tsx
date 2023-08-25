@@ -7,9 +7,7 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import { Dashboard, PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../../prisma/prismaSingleton";
 
 const fetchDashboards = async () => {
   const dashboards = await prisma.dashboard.findMany({
