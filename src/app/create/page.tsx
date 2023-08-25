@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import ComponentGrid from "./componentGrid";
 import ComponentBasket from "./componentBasket";
@@ -10,6 +10,8 @@ import {
   MirrorComponent,
 } from "./components/components";
 import ComponentEditor from "./componentEditor";
+import SaveIcon from "@mui/icons-material/Save";
+import { saveDashboard } from "./actions";
 
 export default function Create() {
   // declare items dictionary state
@@ -37,6 +39,32 @@ export default function Create() {
 
   return (
     <>
+      <form action={saveDashboard}>
+        <Grid
+          container
+          spacing={2}
+          alignItems={"center"}
+          justifyContent={"center"}
+          marginY={5}
+        >
+          <Grid item md={2}>
+            <TextField
+              label="Dashboard name"
+              type="text"
+              name="dashboardName"
+            ></TextField>
+          </Grid>
+          <Grid item md={2}>
+            <Button
+              variant="contained"
+              endIcon={<SaveIcon></SaveIcon>}
+              type="submit"
+            >
+              Save dashboard
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
       <Grid container spacing={2}>
         <Grid item md={2}>
           <ComponentEditor
