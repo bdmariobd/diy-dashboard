@@ -26,7 +26,7 @@ export default function ComponentGrid(props: {
     setlayout(layout.filter((item) => item.i !== i));
   };
   return (
-    <Paper>
+    <Paper elevation={5}>
       <ReactGridLayout
         className={styles.componentGrid}
         /* rowHeight={64} */
