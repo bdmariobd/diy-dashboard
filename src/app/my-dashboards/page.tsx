@@ -20,9 +20,6 @@ const fetchDashboards = async () => {
 
 export default async function MyDashboards() {
   const dashboards = await fetchDashboards();
-  console.log(dashboards);
-  console.log("hello");
-
   return (
     <>
       <h1> My dashboards </h1>
