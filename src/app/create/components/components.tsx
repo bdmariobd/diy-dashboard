@@ -12,19 +12,9 @@ const GridMirror = dynamic(
 
 import dynamic from "next/dynamic";
 import GridText from "./gridText";
+import { ComponentType } from "@prisma/client";
 
 // import Image from "next/image";
-
-export enum ComponentType {
-  Blank = "blank",
-  Text = "text",
-  Image = "image",
-  Video = "video",
-  Audio = "audio",
-  Button = "button",
-  Carousel = "carousel",
-  Mirror = "mirror",
-}
 
 export interface BasketComponent {
   type: ComponentType;
@@ -36,7 +26,7 @@ export interface BasketComponent {
 }
 
 export interface ButtonComponent extends BasketComponent {
-  type: ComponentType.Button;
+  type: "Button";
   text: string;
   color?: string;
   x?: 1;
@@ -45,7 +35,7 @@ export interface ButtonComponent extends BasketComponent {
   maxY: 1;
 }
 export interface ImageComponent extends BasketComponent {
-  type: ComponentType.Image;
+  type: "Image";
   src: string;
   alt: string;
   x?: 4;
@@ -55,7 +45,7 @@ export interface ImageComponent extends BasketComponent {
 }
 
 export interface TextComponent extends BasketComponent {
-  type: ComponentType.Text;
+  type: "Text";
   text: string;
   x?: 4;
   y?: 4;
@@ -64,7 +54,7 @@ export interface TextComponent extends BasketComponent {
 }
 
 export interface MirrorComponent extends BasketComponent {
-  type: ComponentType.Mirror;
+  type: "Mirror";
   cameraActivated: boolean;
   maxX: 4;
   maxY: 4;

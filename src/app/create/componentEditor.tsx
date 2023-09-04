@@ -155,13 +155,13 @@ export default function ComponentEditor(props: {
 
   const renderEditorPanel = () => {
     switch (props.selectedItem?.type) {
-      case "text":
+      case "Text":
         return textEditor();
-      case "image":
+      case "Image":
         return imageEditor();
-      case "button":
+      case "Button":
         return buttonEditor();
-      case "mirror":
+      case "Mirror":
         return mirrorEditor();
       default:
         return <Typography> Select an item </Typography>;

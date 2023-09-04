@@ -4,7 +4,6 @@ import styles from "./page.module.css";
 import {
   BasketComponent,
   ButtonComponent,
-  ComponentType,
   ImageComponent,
   MirrorComponent,
   TextComponent,
@@ -13,7 +12,7 @@ import { v4 as uuid } from "uuid";
 
 //TODO retrieve from another source
 const newButton: ButtonComponent = {
-  type: ComponentType.Button,
+  type: "Button",
   text: "Test",
   id: uuid(),
   color: "#1976D2",
@@ -22,7 +21,7 @@ const newButton: ButtonComponent = {
 };
 
 const newImage: ImageComponent = {
-  type: ComponentType.Image,
+  type: "Image",
   src: "https://picsum.photos/200",
   alt: "placeholder",
   id: uuid(),
@@ -31,7 +30,7 @@ const newImage: ImageComponent = {
 };
 
 const newText: TextComponent = {
-  type: ComponentType.Text,
+  type: "Text",
   text: "Text",
   id: uuid(),
   maxX: 1,
@@ -39,7 +38,7 @@ const newText: TextComponent = {
 };
 
 const newMirror: MirrorComponent = {
-  type: ComponentType.Mirror,
+  type: "Mirror",
   id: uuid(),
   cameraActivated: false,
   maxX: 4,

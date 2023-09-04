@@ -31,7 +31,7 @@ export default function ComponentGrid(props: {
         className={styles.componentGrid}
         /* rowHeight={64} */
         layout={layout}
-        // onLayoutChange={this.onLayoutChange}
+        // onLayoutChange={this.onLayoutChange}   //TODO implement on layout change: save item x and y
         onDrop={(layout, _layoutItem, _event) => {
           //change dropped item id to uuid
           onDropHandler(layout, _layoutItem);
