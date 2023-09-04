@@ -35,12 +35,7 @@ export default function Create() {
   };
 
   const onSubmitDashBoard = (form: FormData) => {
-    saveDashboard({
-      dashboardname: {
-        dashboardname: form.get("dashboardName") as string,
-        items: Object.values(items),
-      },
-    });
+    saveDashboard(form.get("dashboardName") as string, Object.values(items));
   };
 
   return (
